@@ -18,8 +18,8 @@ app.use("/uploads", express.static("uploads"));
 
 // Database connection check
 pool.connect()
-  .then(() => console.log("✅ Connected to PostgreSQL"))
-  .catch((err) => console.error("❌ Database connection error:", err.message));
+  .then(() => console.log("Connected to PostgreSQL"))
+  .catch((err) => console.error("Database connection error:", err.message));
 
 // Public routes (no authentication required)
 app.get("/api/public/ps", getAllPS); // Public route for problem statements
@@ -30,7 +30,7 @@ app.use("/api/admin", adminRoutes);
 app.use("/api/spoc", spocRoutes);
 app.use("/api/team", teamRoutes);
 
-app.get("/", (req, res) => res.send("✅ SIH Backend Running"));
+app.get("/", (req, res) => res.send("SIH Backend Running"));
 
 const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));

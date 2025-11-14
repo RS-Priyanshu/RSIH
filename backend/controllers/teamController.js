@@ -3,7 +3,7 @@ import { pool } from "../config/db.js";
 // ✅ Get all open Problem Statements
 export const getAllPS = async (req, res) => {
   try {
-    const result = await pool.query("SELECT * FROM problem_statements WHERE status='OPEN'");
+    const result = await pool.query("SELECT * FROM problem_statements ORDER BY id DESC");
     res.json(result.rows);
   } catch (err) {
     res.status(500).json({ error: err.message });

@@ -83,6 +83,8 @@ JWT_SECRET=your_super_secret_jwt_key_here
 
 # Server Port
 PORT=5000
+
+ADMIN_PASSWORD=yourpassword
 ```
 
 ### 3. Database Setup
@@ -103,8 +105,8 @@ npm run init-db
 This will:
 - Create all required tables
 - Add a default admin user:
-  - Email: `admin@sih.com`
-  - Password: `admin123`
+  - Email: `your_email`
+  - Password: `your_password`
 
 ### 4. Frontend Setup
 
@@ -164,8 +166,8 @@ RSIH/
 After running `npm run init-db`:
 
 **Admin Account:**
-- Email: `admin@sih.com`
-- Password: `admin123`
+- Email: `your_email`
+- Password: `your_password`
 
 ⚠️ **Important:** Change the default admin password after first login!
 

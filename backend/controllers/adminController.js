@@ -23,11 +23,11 @@ export const verifySPOC = async (req, res) => {
 
 // ✅ Create Problem Statement
 export const createPS = async (req, res) => {
-  const { title, description, difficulty, status } = req.body;
+  const { title, description, type, category } = req.body;
   try {
     const result = await pool.query(
-      "INSERT INTO problem_statements (title, description, difficulty, status) VALUES ($1, $2, $3, $4) RETURNING *",
-      [title, description, difficulty, status || "OPEN"]
+      "INSERT INTO problem_statements (title, description, type, category) VALUES ($1, $2, $3, $4) RETURNING *",
+      [title, description, type, category]
     );
     res.status(201).json(result.rows[0]);
   } catch (err) {
@@ -48,11 +48,11 @@ export const getAllPS = async (req, res) => {
 // ✅ Update Problem Statement
 export const updatePS = async (req, res) => {
   const { id } = req.params;
-  const { title, description, difficulty, status } = req.body;
+  const { title, description, type, category } = req.body;
   try {
     const result = await pool.query(
-      "UPDATE problem_statements SET title=$1, description=$2, difficulty=$3, status=$4 WHERE id=$5 RETURNING *",
-      [title, description, difficulty, status, id]
+      "UPDATE problem_statements SET title=$1, description=$2, type=$3, category=$4 WHERE id=$5 RETURNING *",
+      [title, description, type, category, id]
     );
     res.json(result.rows[0]);
   } catch (err) {

@@ -1,7 +1,5 @@
 import { useEffect, useState } from "react";
 import api from "../services/api";
-// eslint-disable-next-line no-unused-vars
-import { motion } from "framer-motion";
 
 export default function PublicProblems() {
   const [problems, setProblems] = useState([]);
@@ -27,50 +25,66 @@ export default function PublicProblems() {
   );
 
   return (
-    <div className="min-h-screen bg-gray-50 px-6 py-12">
-      <div className="max-w-6xl mx-auto">
-        <h1 className="text-4xl font-bold text-center text-gray-800 mb-8">
-          Explore <span className="text-green-500">Problem Statements</span>
+    <div className="min-h-screen bg-white px-6 py-12">
+      <div className="max-w-7xl mx-auto">
+        <h1 className="text-4xl font-bold text-center text-black mb-8">
+          Problem Statements
         </h1>
 
+        {/* Search Input */}
         <input
           type="text"
-          placeholder="🔍 Search problem statements..."
+          placeholder="Search problem statements..."
           value={search}
           onChange={(e) => setSearch(e.target.value)}
-          className="w-full mb-6 p-3 border rounded-lg shadow-sm focus:ring-2 focus:ring-green-400"
+          className="w-full mb-6 p-3 border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-blue-600 focus:border-blue-600 bg-white text-black"
         />
 
+        {/* Table */}
         {loading ? (
-          <p className="text-center text-gray-500">Loading problem statements...</p>
+          <p className="text-center text-gray-600">Loading problem statements...</p>
         ) : filtered.length === 0 ? (
-          <p className="text-center text-gray-500">No problem statements found.</p>
+          <p className="text-center text-gray-600">No problem statements found.</p>
         ) : (
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {filtered.map((p, index) => (
-              <motion.div
-                key={p.id}
-                initial={{ opacity: 0, y: 30 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ delay: index * 0.05 }}
-                className="bg-white p-6 rounded-xl shadow hover:shadow-lg border-l-4 border-green-500"
-              >
-                <h2 className="font-semibold text-lg text-gray-800 mb-2">
-                  {p.title}
-                </h2>
-                <p className="text-gray-600 text-sm mb-2">{p.description}</p>
-                <p className="text-gray-500 text-xs">
-                  Difficulty: <span className="font-semibold">{p.difficulty}</span>
-                </p>
-                <p
-                  className={`text-sm mt-2 font-medium ${
-                    p.status === "OPEN" ? "text-green-500" : "text-red-500"
-                  }`}
-                >
-                  {p.status === "OPEN" ? "🟢 Open" : "🔴 Closed"}
-                </p>
-              </motion.div>
-            ))}
+          <div className="overflow-x-auto shadow-lg rounded-lg border border-gray-200">
+            <table className="min-w-full text-left bg-white">
+              <thead className="bg-blue-600 text-white">
+                <tr>
+                  <th className="py-3 px-4 font-semibold">PS ID</th>
+                  <th className="py-3 px-4 font-semibold">Title</th>
+                  <th className="py-3 px-4 font-semibold">Description</th>
+                  <th className="py-3 px-4 font-semibold">Type</th>
+                  <th className="py-3 px-4 font-semibold">Category</th>
+                </tr>
+              </thead>
+
+              <tbody>
+                {filtered.map((p, idx) => (
+                  <tr
+                    key={p.id}
+                    className="border-b border-gray-200 hover:bg-blue-50 transition"
+                  >
+                    <td className="py-3 px-4 text-black">{idx + 1}</td>
+
+                    <td className="py-3 px-4 font-semibold text-black max-w-[250px]">
+                      {p.title}
+                    </td>
+
+                    <td className="py-3 px-4 text-gray-700 max-w-[350px] truncate">
+                      {p.description}
+                    </td>
+
+                    <td className="py-3 px-4 text-black">
+                      {p.type || "N/A"}
+                    </td>
+
+                    <td className="py-3 px-4 text-black font-medium">
+                      {p.category || "N/A"}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
           </div>
         )}
       </div>

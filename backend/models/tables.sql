@@ -25,8 +25,8 @@ CREATE TABLE problem_statements (
   id SERIAL PRIMARY KEY,
   title TEXT,
   description TEXT,
-  difficulty VARCHAR(20),
-  status VARCHAR(20)
+  type VARCHAR(50),
+  category VARCHAR(50)
 );
 
 CREATE TABLE submissions (
